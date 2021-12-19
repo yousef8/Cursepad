@@ -15,6 +15,16 @@ def main(scr):
         scr.refresh()
         c = scr.getch()
 
+        # Implement moving keys
+        if c == curses.KEY_UP:
+            cursor.up()
+        elif c == curses.KEY_DOWN:
+            cursor.down()
+        elif c == curses.KEY_RIGHT:
+            cursor.right()
+        elif c == curses.KEY_LEFT:
+            cursor.left()
+
         # Implementing deleting
         if c == 8 or c == 263:  # Backspace
             cursor.delete()
