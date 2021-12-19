@@ -4,6 +4,8 @@ import curses
 class Cursor:
     def __init__(self, stdscr):
         self.stdscr = stdscr
+        self.far_y = 0
+        self.far_x = 0
 
     def coordinate(self):
         y, x = self.stdscr.getyx()
@@ -11,6 +13,12 @@ class Cursor:
 
     def move(self, y, x):
         self.stdscr.move(y, x)
+
+    def far_coord(self):
+        y, x = self.coordinate()
+        if (y, x) > (self.far_y, self.far_x):
+            self.far_y = y
+            self.far_x = x
 
     def up(self):
         y, x = self.coordinate()

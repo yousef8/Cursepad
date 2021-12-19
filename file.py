@@ -1,9 +1,11 @@
 import curses
+import cursor
 
 
 class File:
-    def __init__(self, stdscr):
+    def __init__(self, stdscr, cursor):
         self.stdscr = stdscr
+        self.cursor = cursor
 
     def file_name(self):
         self.stdscr.addstr(curses.LINES - 1, 0, "File name: ", curses.A_REVERSE)
@@ -19,7 +21,7 @@ class File:
         file_name = self.file_name()
 
         with open(file_name, "w") as f:
-            cursor_line = self.stdscr.getyx()[0]
+            cursor_line = self.cursor.far_y
             lines = []
             for i in range(cursor_line + 1):
                 line = (

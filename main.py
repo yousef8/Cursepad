@@ -9,11 +9,12 @@ Space = 32
 def main(scr):
     # Make a new screen
     curses.echo()
-    file = File(scr)
     cursor = Cursor(scr)
+    file = File(scr, cursor)
     while True:
         scr.refresh()
         c = scr.getch()
+        cursor.far_coord()
 
         # Implement moving keys
         if c == curses.KEY_UP:
