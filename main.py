@@ -1,6 +1,7 @@
 import curses
 import sys
 from file import File
+from cursor import Cursor
 
 Escape = 27
 Space = 32
@@ -9,9 +10,14 @@ def main(scr):
     # Make a new screen
     curses.echo()
     file = File(scr)
+    cursor = Cursor(scr)
     while True:
         scr.refresh()
         c = scr.getch()
+
+        # Implementing deleting
+        if c == 8 or c == 263:  # Backspace
+            cursor.delete()
 
         # Saving to a file
         if c == 19:  # CTRL + S
