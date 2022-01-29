@@ -2,10 +2,10 @@ import curses
 
 
 class Cursor:
-    def __init__(self, stdscr):
+    def __init__(self, stdscr, y=0, x=0):
         self.stdscr = stdscr
-        self.far_y = 0
-        self.far_x = 0
+        self.far_y = y
+        self.far_x = x  # Not important
 
     def coordinate(self):
         y, x = self.stdscr.getyx()
@@ -16,9 +16,8 @@ class Cursor:
 
     def far_coord(self):
         y, x = self.coordinate()
-        if (y, x) > (self.far_y, self.far_x):
+        if y > self.far_y:
             self.far_y = y
-            self.far_x = x
 
     def up(self):
         y, x = self.coordinate()
@@ -51,5 +50,6 @@ class Cursor:
             self.stdscr.delch(y, x)
             last_previous_col = len(self.stdscr.instr(y - 1, 0).decode().strip())
             self.stdscr.move(y - 1, last_previous_col)
+
         else:
             self.stdscr.delch(y, x)
